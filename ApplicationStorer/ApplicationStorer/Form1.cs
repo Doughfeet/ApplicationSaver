@@ -34,9 +34,10 @@ namespace ApplicationStorer
             {
                 SqlDataAdapter dap = new SqlDataAdapter(query, connection);
                 dap.Fill(dtApplication);
+                return dtApplication;
             }
 
-            return dtApplication;
+
         }
 
         private void AddButton1_Click(object sender, EventArgs e)
