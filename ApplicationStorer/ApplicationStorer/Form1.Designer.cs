@@ -158,16 +158,16 @@
             // dataGridView1
             // 
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Location = new System.Drawing.Point(92, 726);
+            this.dataGridView1.Location = new System.Drawing.Point(92, 644);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.RowTemplate.Height = 33;
-            this.dataGridView1.Size = new System.Drawing.Size(1336, 257);
+            this.dataGridView1.Size = new System.Drawing.Size(1336, 339);
             this.dataGridView1.TabIndex = 11;
             // 
             // AddButton1
             // 
             this.AddButton1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.125F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.AddButton1.Location = new System.Drawing.Point(954, 222);
+            this.AddButton1.Location = new System.Drawing.Point(987, 294);
             this.AddButton1.Name = "AddButton1";
             this.AddButton1.Size = new System.Drawing.Size(267, 81);
             this.AddButton1.TabIndex = 12;
@@ -177,7 +177,7 @@
             // UpdateButton
             // 
             this.UpdateButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.125F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.UpdateButton.Location = new System.Drawing.Point(954, 328);
+            this.UpdateButton.Location = new System.Drawing.Point(987, 400);
             this.UpdateButton.Name = "UpdateButton";
             this.UpdateButton.Size = new System.Drawing.Size(267, 81);
             this.UpdateButton.TabIndex = 13;
@@ -187,7 +187,7 @@
             // DeleteButton
             // 
             this.DeleteButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.125F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.DeleteButton.Location = new System.Drawing.Point(954, 434);
+            this.DeleteButton.Location = new System.Drawing.Point(987, 506);
             this.DeleteButton.Name = "DeleteButton";
             this.DeleteButton.Size = new System.Drawing.Size(267, 81);
             this.DeleteButton.TabIndex = 14;
