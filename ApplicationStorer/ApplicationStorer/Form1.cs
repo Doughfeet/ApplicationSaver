@@ -68,5 +68,23 @@ namespace ApplicationStorer
             }
 
         }
+
+        private void dataGridView1_MouseDoubleClick(object sender, MouseEventArgs e)
+        {
+            try
+            {
+                CompanyTextBox.Text = dataGridView1.SelectedRows[0].Cells[1].Value.ToString();
+                WorkingTitleTextBox.Text = dataGridView1.SelectedRows[0].Cells[2].Value.ToString();
+                DurationComboBox.Text = dataGridView1.SelectedRows[0].Cells[3].Value.ToString();
+                AppliedDateTimePicker.Value = DateTime.Parse(dataGridView1.SelectedRows[0].Cells[4].Value.ToString());
+                DeadlineDateTimePicker.Value = DateTime.Parse(dataGridView1.SelectedRows[0].Cells[5].Value.ToString());
+                WebpageTextBox.Text = dataGridView1.SelectedRows[0].Cells[6].Value.ToString();
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("No data!");
+            }
+
+        }
     }
 }
