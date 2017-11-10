@@ -30,16 +30,42 @@ namespace ApplicationStorer
             string connectionString = @"Data Source = (LocalDB)\MSSQLLocalDB; AttachDbFilename = C:\Users\kenne\Source\Repos\ApplicationStorer\ApplicationStorer\ApplicationStorer\Data\ApplicationData.mdf; Integrated Security = True; Connect Timeout = 30";
             string query = "SELECT * FROM ApplicationTable";
 
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                SqlDataAdapter dap = new SqlDataAdapter(query, connection);
+                dap.Fill(dtApplication);
+            }
+
+            return dtApplication;
+        }
+
+        private void AddButton1_Click(object sender, EventArgs e)
+        {
+
+            string connectionString = @"Data Source = (LocalDB)\MSSQLLocalDB; AttachDbFilename = C:\Users\kenne\Source\Repos\ApplicationStorer\ApplicationStorer\ApplicationStorer\Data\ApplicationData.mdf; Integrated Security = True; Connect Timeout = 30";
+            string query = "" +
+                "INSERT INTO ApplicationTable" +
+                    "(Company, WorkTitle, Duration, AppliedDate, DeadlineDate, Webpage)" +
+                "VALUES" +
+                    "(@Company, @WorkTitle, @Duration, @AppliedDate, @DeadlineDate, @Webpage)";
+
 
             using (SqlConnection connection = new SqlConnection(connectionString))
             using (SqlCommand cmd = new SqlCommand(query, connection))
             {
                 connection.Open();
-                SqlDataReader reader = cmd.ExecuteReader();
-                dtApplication.Load(reader);
-            }
 
-            return dtApplication;
+                cmd.Parameters.AddWithValue("@Company", CompanyTextBox.Text);
+                cmd.Parameters.AddWithValue("@WorkTitle", WorkingTitleTextBox.Text);
+                cmd.Parameters.AddWithValue("@Duration", DurationComboBox.Text);
+                cmd.Parameters.AddWithValue("@AppliedDate", AppliedDateTimePicker.Value);
+                cmd.Parameters.AddWithValue("@DeadlineDate", DeadlineDateTimePicker.Value);
+                cmd.Parameters.AddWithValue("@Webpage", WebpageTextBox.Text);
+  
+                cmd.ExecuteNonQuery();
+                dataGridView1.DataSource = GetApplicationData();
+
+            }
 
         }
     }

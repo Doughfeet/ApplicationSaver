@@ -44,7 +44,7 @@
             this.UpdateButton = new System.Windows.Forms.Button();
             this.DeleteButton = new System.Windows.Forms.Button();
             this.label7 = new System.Windows.Forms.Label();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.WebpageTextBox = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -173,6 +173,7 @@
             this.AddButton1.TabIndex = 12;
             this.AddButton1.Text = "ADD";
             this.AddButton1.UseVisualStyleBackColor = true;
+            this.AddButton1.Click += new System.EventHandler(this.AddButton1_Click);
             // 
             // UpdateButton
             // 
@@ -204,20 +205,20 @@
             this.label7.TabIndex = 15;
             this.label7.Text = "Webpage";
             // 
-            // textBox1
+            // WebpageTextBox
             // 
-            this.textBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.125F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox1.Location = new System.Drawing.Point(320, 549);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(602, 38);
-            this.textBox1.TabIndex = 16;
+            this.WebpageTextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.125F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.WebpageTextBox.Location = new System.Drawing.Point(320, 549);
+            this.WebpageTextBox.Name = "WebpageTextBox";
+            this.WebpageTextBox.Size = new System.Drawing.Size(602, 38);
+            this.WebpageTextBox.TabIndex = 16;
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 25F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1530, 1046);
-            this.Controls.Add(this.textBox1);
+            this.Controls.Add(this.WebpageTextBox);
             this.Controls.Add(this.label7);
             this.Controls.Add(this.DeleteButton);
             this.Controls.Add(this.UpdateButton);
@@ -261,7 +262,7 @@
         private System.Windows.Forms.Button UpdateButton;
         private System.Windows.Forms.Button DeleteButton;
         private System.Windows.Forms.Label label7;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox WebpageTextBox;
     }
 }
 
