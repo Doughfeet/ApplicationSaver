@@ -42,7 +42,6 @@ namespace ApplicationStorer
 
         private void AddButton1_Click(object sender, EventArgs e)
         {
-
             string connectionString = @"Data Source = (LocalDB)\MSSQLLocalDB; AttachDbFilename = C:\Users\kenne\Source\Repos\ApplicationStorer\ApplicationStorer\ApplicationStorer\Data\ApplicationData.mdf; Integrated Security = True; Connect Timeout = 30";
             string query = "" +
                 "INSERT INTO ApplicationTable" +
