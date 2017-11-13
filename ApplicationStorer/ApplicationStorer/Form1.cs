@@ -66,6 +66,35 @@ namespace ApplicationStorer
                 Clear();
             }
         }
+        private void DeleteButton_Click(object sender, EventArgs e)
+        {
+            string connectionString = @"Data Source = (LocalDB)\MSSQLLocalDB; AttachDbFilename = C:\Users\kenne\Source\Repos\ApplicationStorer\ApplicationStorer\ApplicationStorer\Data\ApplicationData.mdf; Integrated Security = True; Connect Timeout = 30";
+            string query = @"DELETE FROM ApplicationTable 
+                            WHERE Id = @rowId";
+
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            using (SqlCommand cmd = new SqlCommand(query, connection))
+            {
+                connection.Open();
+                try
+                {
+                    int selectedIndex = dataGridView1.SelectedRows[0].Index;
+                    int rowId = Convert.ToInt32(dataGridView1[0, selectedIndex].Value);
+
+                    cmd.Parameters.Add("@rowId", SqlDbType.Int).Value = rowId;
+                    cmd.ExecuteNonQuery();
+                    dataGridView1.Rows.RemoveAt(selectedIndex);
+                    Clear();
+                }
+                catch (Exception)
+                {
+                    MessageBox.Show("There is no data", "Work application storer", MessageBoxButtons.OK, MessageBoxIcon.Error, MessageBoxDefaultButton.Button1,
+                                   0);
+                }
+            }
+        }
+
+
 
         private void dataGridView1_MouseDoubleClick(object sender, MouseEventArgs e)
         {
@@ -95,5 +124,7 @@ namespace ApplicationStorer
             WebpageTextBox.Text = "";
 
         }
+
+
     }
 }
