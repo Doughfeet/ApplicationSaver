@@ -17,11 +17,14 @@ namespace ApplicationStorer
         {
             InitializeComponent();
         }
-
         private void Form1_Load(object sender, EventArgs e)
         {
             dataGridView1.DataSource = GetApplicationData();
         }
+
+        int selectedRow;
+        string connectionString = @"Data Source = (LocalDB)\MSSQLLocalDB; AttachDbFilename = C:\Users\kenne\Source\Repos\ApplicationStorer\ApplicationStorer\ApplicationStorer\Data\ApplicationData.mdf; Integrated Security = True; Connect Timeout = 30";
+
 
         private DataTable GetApplicationData()
         {
@@ -37,10 +40,8 @@ namespace ApplicationStorer
                 return dtApplication;
             }
         }
-
         private void AddButton1_Click(object sender, EventArgs e)
         {
-            string connectionString = @"Data Source = (LocalDB)\MSSQLLocalDB; AttachDbFilename = C:\Users\kenne\Source\Repos\ApplicationStorer\ApplicationStorer\ApplicationStorer\Data\ApplicationData.mdf; Integrated Security = True; Connect Timeout = 30";
             string query = "" +
                 "INSERT INTO ApplicationTable" +
                     "(Company, WorkTitle, Duration, AppliedDate, DeadlineDate, Webpage)" +
@@ -68,7 +69,6 @@ namespace ApplicationStorer
         }
         private void DeleteButton_Click(object sender, EventArgs e)
         {
-            string connectionString = @"Data Source = (LocalDB)\MSSQLLocalDB; AttachDbFilename = C:\Users\kenne\Source\Repos\ApplicationStorer\ApplicationStorer\ApplicationStorer\Data\ApplicationData.mdf; Integrated Security = True; Connect Timeout = 30";
             string query = @"DELETE FROM ApplicationTable 
                             WHERE Id = @rowId";
 
@@ -95,32 +95,23 @@ namespace ApplicationStorer
         }
         private void UpdateButton_Click(object sender, EventArgs e)
         {
-            string connectionString = @"Data Source = (LocalDB)\MSSQLLocalDB; AttachDbFilename = C:\Users\kenne\Source\Repos\ApplicationStorer\ApplicationStorer\ApplicationStorer\Data\ApplicationData.mdf; Integrated Security = True; Connect Timeout = 30";
-            string query = @"
-                            SELECT * FROM ApplicationTable
-                            UPDATE ";
+
         }
 
 
-        //private void dataGridView1_MouseDoubleClick(object sender, MouseEventArgs e)
-        //{
-        //    try
-        //    {
-        //        selectedRow =
 
-        //        CompanyTextBox.Text = dataGridView1.SelectedRows[0].Cells[1].Value.ToString();
-        //        WorkingTitleTextBox.Text = dataGridView1.SelectedRows[0].Cells[2].Value.ToString();
-        //        DurationComboBox.Text = dataGridView1.SelectedRows[0].Cells[3].Value.ToString();
-        //        AppliedDateTimePicker.Value = DateTime.Parse(dataGridView1.SelectedRows[0].Cells[4].Value.ToString());
-        //        DeadlineDateTimePicker.Value = DateTime.Parse(dataGridView1.SelectedRows[0].Cells[5].Value.ToString());
-        //        WebpageTextBox.Text = dataGridView1.SelectedRows[0].Cells[6].Value.ToString();
-        //    }
-        //    catch (Exception)
-        //    {
-        //        MessageBox.Show("No data!");
-        //    }
+        private void dataGridView1_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            selectedRow = e.RowIndex;
+            DataGridViewRow row = dataGridView1.Rows[selectedRow];
 
-        //}
+            CompanyTextBox.Text = row.Cells[1].Value.ToString();
+            WorkingTitleTextBox.Text = row.Cells[2].Value.ToString();
+            DurationComboBox.Text = row.Cells[3].Value.ToString();
+            AppliedDateTimePicker.Value = DateTime.Parse(row.Cells[4].Value.ToString());
+            DeadlineDateTimePicker.Value = DateTime.Parse(row.Cells[5].Value.ToString());
+            WebpageTextBox.Text = row.Cells[6].Value.ToString();
+        }
 
         private void Clear()
         {
@@ -131,19 +122,6 @@ namespace ApplicationStorer
             DeadlineDateTimePicker.Value = DateTime.Now;
             WebpageTextBox.Text = "";
 
-        }
-
-        private void dataGridView1_CellClick(object sender, DataGridViewCellEventArgs e)
-        {
-            int selectedRow = e.RowIndex;
-            DataGridViewRow row = dataGridView1.Rows[selectedRow];
-
-            CompanyTextBox.Text = row.Cells[1].Value.ToString();
-            WorkingTitleTextBox.Text = row.Cells[2].Value.ToString();
-            DurationComboBox.Text = row.Cells[3].Value.ToString();
-            AppliedDateTimePicker.Value = DateTime.Parse(row.Cells[4].Value.ToString());
-            DeadlineDateTimePicker.Value = DateTime.Parse(row.Cells[5].Value.ToString());
-            WebpageTextBox.Text = row.Cells[6].Value.ToString();
         }
     }
 }
