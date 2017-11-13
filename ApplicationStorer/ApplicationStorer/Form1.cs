@@ -42,11 +42,11 @@ namespace ApplicationStorer
         }
         private void AddButton1_Click(object sender, EventArgs e)
         {
-            string query = "" +
-                "INSERT INTO ApplicationTable" +
-                    "(Company, WorkTitle, Duration, AppliedDate, DeadlineDate, Webpage)" +
-                "VALUES" +
-                    "(@Company, @WorkTitle, @Duration, @AppliedDate, @DeadlineDate, @Webpage)";
+            string query = @"
+                INSERT INTO ApplicationTable 
+                    (Company, WorkTitle, Duration, AppliedDate, DeadlineDate, Webpage)
+                VALUES
+                    (@Company, @WorkTitle, @Duration, @AppliedDate, @DeadlineDate, @Webpage)";
 
 
             using (SqlConnection connection = new SqlConnection(connectionString))
@@ -69,7 +69,8 @@ namespace ApplicationStorer
         }
         private void DeleteButton_Click(object sender, EventArgs e)
         {
-            string query = @"DELETE FROM ApplicationTable 
+            string query = @"
+                            DELETE FROM ApplicationTable 
                             WHERE Id = @rowId";
 
             using (SqlConnection connection = new SqlConnection(connectionString))
@@ -95,6 +96,40 @@ namespace ApplicationStorer
         }
         private void UpdateButton_Click(object sender, EventArgs e)
         {
+            string query = @"
+                            UPDATE ApplicationTable 
+                            SET 
+                                Company = @Company, 
+                                WorkTitle = @WorkTitle, 
+                                Duration = @Duration, 
+                                AppliedDate = @AppliedDate, 
+                                DeadlineDate = @DeadlineDate, 
+                                Webpage = @Webpage 
+                            WHERE Id = @rowId";
+
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            using (SqlCommand cmd = new SqlCommand(query, connection))
+            {
+                connection.Open();
+
+
+                int selectedIndex = dataGridView1.SelectedRows[0].Index;
+                int rowId = Convert.ToInt32(dataGridView1[0, selectedIndex].Value);
+
+                cmd.Parameters.Add("@rowId", SqlDbType.Int).Value = rowId;
+
+                cmd.Parameters.AddWithValue("@Company", CompanyTextBox.Text);
+                cmd.Parameters.AddWithValue("@WorkTitle", WorkingTitleTextBox.Text);
+                cmd.Parameters.AddWithValue("@Duration", DurationComboBox.Text);
+                cmd.Parameters.AddWithValue("@AppliedDate", AppliedDateTimePicker.Value);
+                cmd.Parameters.AddWithValue("@DeadlineDate", DeadlineDateTimePicker.Value);
+                cmd.Parameters.AddWithValue("@Webpage", WebpageTextBox.Text);
+
+                cmd.ExecuteNonQuery();
+                dataGridView1.DataSource = GetApplicationData();
+
+                Clear();
+            }
 
         }
 
