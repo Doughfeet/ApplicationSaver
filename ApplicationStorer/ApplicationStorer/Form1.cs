@@ -171,5 +171,15 @@ namespace ApplicationStorer
             InformationRichTextBox1.Clear();
 
         }
+
+        private void exitToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
+        private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            System.Diagnostics.Process.Start("http://www.kennethblix.no");
+        }
     }
 }
