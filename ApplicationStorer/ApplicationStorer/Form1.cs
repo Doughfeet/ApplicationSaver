@@ -20,19 +20,24 @@ namespace ApplicationStorer
         private void Form1_Load(object sender, EventArgs e)
         {
             dataGridView1.DataSource = GetApplicationData();
+            dataGridView1.Columns[0].Visible = false;
+            dataGridView1.Columns[1].Width = 250;
+
         }
+
 
         int selectedRow;
         string connectionString = @"Data Source = (LocalDB)\MSSQLLocalDB; AttachDbFilename = C:\Users\kenne\Source\Repos\ApplicationStorer\ApplicationStorer\ApplicationStorer\Data\ApplicationData.mdf; Integrated Security = True; Connect Timeout = 30";
         
-
+        
+        //Populate the table! Using SQLDataAdapter
         private DataTable GetApplicationData()
         {
             DataTable dtApplication = new DataTable();
-
+            
             string connectionString = @"Data Source = (LocalDB)\MSSQLLocalDB; AttachDbFilename = C:\Users\kenne\Source\Repos\ApplicationStorer\ApplicationStorer\ApplicationStorer\Data\ApplicationData.mdf; Integrated Security = True; Connect Timeout = 30";
             string query = "SELECT * FROM ApplicationTable";
-
+            
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
                 SqlDataAdapter dap = new SqlDataAdapter(query, connection);
@@ -40,6 +45,7 @@ namespace ApplicationStorer
                 return dtApplication;
             }
         }
+        //ADDING applications
         private void AddButton1_Click(object sender, EventArgs e)
         {
             string query = @"
@@ -68,6 +74,7 @@ namespace ApplicationStorer
                 Clear();
             }
         }
+        //DELETING applications
         private void DeleteButton_Click(object sender, EventArgs e)
         {
             string query = @"
@@ -95,6 +102,7 @@ namespace ApplicationStorer
                 }
             }
         }
+        //UPDATING the table, gives the user the possibility to update informaition
         private void UpdateButton_Click(object sender, EventArgs e)
         {
             string query = @"
@@ -137,14 +145,14 @@ namespace ApplicationStorer
         }
 
 
-
+        //Row click, populate the text boxes with given table information
         private void dataGridView1_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             try
             {
                 selectedRow = e.RowIndex;
                 DataGridViewRow row = dataGridView1.Rows[selectedRow];
-
+ 
                 CompanyTextBox.Text = row.Cells[1].Value.ToString();
                 WorkingTitleTextBox.Text = row.Cells[2].Value.ToString();
                 DurationComboBox.Text = row.Cells[3].Value.ToString();
@@ -160,6 +168,9 @@ namespace ApplicationStorer
 
         }
 
+
+
+        //methode for clearing the textboxes
         private void Clear()
         {
             CompanyTextBox.Text = "";
@@ -172,17 +183,10 @@ namespace ApplicationStorer
 
         }
 
-        private void exitToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            this.Close();
-        }
 
-        private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
-        {
-            System.Diagnostics.Process.Start("http://www.kennethblix.no");
-        }
 
-        private void button1_Click(object sender, EventArgs e)
+        //gives the user the possibility to visit, stored webpage
+        private void visitWebpageButton_Click(object sender, EventArgs e)
         {
             try
             {
@@ -194,6 +198,29 @@ namespace ApplicationStorer
                                    0);
             }
 
+        }
+  
+
+        /*
+         MENU
+             */ 
+        //NEW
+        private void newToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            
+        }
+        //EXIT
+        private void exitToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
+
+
+        //link to my private webpage
+        private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            System.Diagnostics.Process.Start("http://www.kennethblix.no");
         }
     }
 }
