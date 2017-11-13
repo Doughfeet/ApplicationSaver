@@ -24,7 +24,7 @@ namespace ApplicationStorer
 
         int selectedRow;
         string connectionString = @"Data Source = (LocalDB)\MSSQLLocalDB; AttachDbFilename = C:\Users\kenne\Source\Repos\ApplicationStorer\ApplicationStorer\ApplicationStorer\Data\ApplicationData.mdf; Integrated Security = True; Connect Timeout = 30";
-
+        
 
         private DataTable GetApplicationData()
         {
@@ -180,6 +180,20 @@ namespace ApplicationStorer
         private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             System.Diagnostics.Process.Start("http://www.kennethblix.no");
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                System.Diagnostics.Process.Start($"{WebpageTextBox.Text}");
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Incorrect website!", "Work application saver", MessageBoxButtons.OK, MessageBoxIcon.Error, MessageBoxDefaultButton.Button1,
+                                   0);
+            }
+
         }
     }
 }
