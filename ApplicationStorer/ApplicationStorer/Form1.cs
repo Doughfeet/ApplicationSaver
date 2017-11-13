@@ -44,9 +44,9 @@ namespace ApplicationStorer
         {
             string query = @"
                 INSERT INTO ApplicationTable 
-                    (Company, WorkTitle, Duration, AppliedDate, DeadlineDate, Webpage)
+                    (Company, WorkTitle, Duration, AppliedDate, DeadlineDate, Webpage, Information)
                 VALUES
-                    (@Company, @WorkTitle, @Duration, @AppliedDate, @DeadlineDate, @Webpage)";
+                    (@Company, @WorkTitle, @Duration, @AppliedDate, @DeadlineDate, @Webpage, @Information)";
 
 
             using (SqlConnection connection = new SqlConnection(connectionString))
@@ -60,7 +60,8 @@ namespace ApplicationStorer
                 cmd.Parameters.AddWithValue("@AppliedDate", AppliedDateTimePicker.Value);
                 cmd.Parameters.AddWithValue("@DeadlineDate", DeadlineDateTimePicker.Value);
                 cmd.Parameters.AddWithValue("@Webpage", WebpageTextBox.Text);
-  
+                cmd.Parameters.AddWithValue("@Information", InformationRichTextBox1.Text);
+
                 cmd.ExecuteNonQuery();
                 dataGridView1.DataSource = GetApplicationData();
 
@@ -104,7 +105,8 @@ namespace ApplicationStorer
                                 Duration = @Duration, 
                                 AppliedDate = @AppliedDate, 
                                 DeadlineDate = @DeadlineDate, 
-                                Webpage = @Webpage 
+                                Webpage = @Webpage,
+                                Information = @Information 
                             WHERE Id = @rowId";
 
             using (SqlConnection connection = new SqlConnection(connectionString))
@@ -124,6 +126,7 @@ namespace ApplicationStorer
                 cmd.Parameters.AddWithValue("@AppliedDate", AppliedDateTimePicker.Value);
                 cmd.Parameters.AddWithValue("@DeadlineDate", DeadlineDateTimePicker.Value);
                 cmd.Parameters.AddWithValue("@Webpage", WebpageTextBox.Text);
+                cmd.Parameters.AddWithValue("@Information", InformationRichTextBox1.Text);
 
                 cmd.ExecuteNonQuery();
                 dataGridView1.DataSource = GetApplicationData();
@@ -146,6 +149,7 @@ namespace ApplicationStorer
             AppliedDateTimePicker.Value = DateTime.Parse(row.Cells[4].Value.ToString());
             DeadlineDateTimePicker.Value = DateTime.Parse(row.Cells[5].Value.ToString());
             WebpageTextBox.Text = row.Cells[6].Value.ToString();
+            InformationRichTextBox1.Text = row.Cells[7].Value.ToString();
         }
 
         private void Clear()
@@ -156,7 +160,10 @@ namespace ApplicationStorer
             AppliedDateTimePicker.Value = DateTime.Now;
             DeadlineDateTimePicker.Value = DateTime.Now;
             WebpageTextBox.Text = "";
+            InformationRichTextBox1.Clear();
 
         }
+
+
     }
 }
