@@ -140,16 +140,24 @@ namespace ApplicationStorer
 
         private void dataGridView1_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            selectedRow = e.RowIndex;
-            DataGridViewRow row = dataGridView1.Rows[selectedRow];
+            try
+            {
+                selectedRow = e.RowIndex;
+                DataGridViewRow row = dataGridView1.Rows[selectedRow];
 
-            CompanyTextBox.Text = row.Cells[1].Value.ToString();
-            WorkingTitleTextBox.Text = row.Cells[2].Value.ToString();
-            DurationComboBox.Text = row.Cells[3].Value.ToString();
-            AppliedDateTimePicker.Value = DateTime.Parse(row.Cells[4].Value.ToString());
-            DeadlineDateTimePicker.Value = DateTime.Parse(row.Cells[5].Value.ToString());
-            WebpageTextBox.Text = row.Cells[6].Value.ToString();
-            InformationRichTextBox1.Text = row.Cells[7].Value.ToString();
+                CompanyTextBox.Text = row.Cells[1].Value.ToString();
+                WorkingTitleTextBox.Text = row.Cells[2].Value.ToString();
+                DurationComboBox.Text = row.Cells[3].Value.ToString();
+                AppliedDateTimePicker.Value = DateTime.Parse(row.Cells[4].Value.ToString());
+                DeadlineDateTimePicker.Value = DateTime.Parse(row.Cells[5].Value.ToString());
+                WebpageTextBox.Text = row.Cells[6].Value.ToString();
+                InformationRichTextBox1.Text = row.Cells[7].Value.ToString();
+            }
+            catch (Exception)
+            {
+
+            }
+
         }
 
         private void Clear()
@@ -163,7 +171,5 @@ namespace ApplicationStorer
             InformationRichTextBox1.Clear();
 
         }
-
-
     }
 }
