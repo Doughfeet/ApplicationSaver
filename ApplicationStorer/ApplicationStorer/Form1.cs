@@ -36,8 +36,6 @@ namespace ApplicationStorer
                 dap.Fill(dtApplication);
                 return dtApplication;
             }
-
-
         }
 
         private void AddButton1_Click(object sender, EventArgs e)
@@ -65,8 +63,8 @@ namespace ApplicationStorer
                 cmd.ExecuteNonQuery();
                 dataGridView1.DataSource = GetApplicationData();
 
+                Clear();
             }
-
         }
 
         private void dataGridView1_MouseDoubleClick(object sender, MouseEventArgs e)
@@ -84,6 +82,17 @@ namespace ApplicationStorer
             {
                 MessageBox.Show("No data!");
             }
+
+        }
+
+        private void Clear()
+        {
+            CompanyTextBox.Text = "";
+            WorkingTitleTextBox.Text = "";
+            DurationComboBox.Text = "";
+            AppliedDateTimePicker.Value = DateTime.Now;
+            DeadlineDateTimePicker.Value = DateTime.Now;
+            WebpageTextBox.Text = "";
 
         }
     }
