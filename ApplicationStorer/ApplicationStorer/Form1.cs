@@ -20,6 +20,9 @@ namespace ApplicationStorer
         private void Form1_Load(object sender, EventArgs e)
         {
             dataGridView1.DataSource = GetApplicationData();
+
+            //Clear selection when the program starts
+            dataGridView1.ClearSelection();
             dataGridView1.Columns[0].Visible = false;
             dataGridView1.Columns[1].Width = 250;
 
@@ -27,7 +30,7 @@ namespace ApplicationStorer
 
 
         int selectedRow;
-        string connectionString = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=|DataDirectory|\ApplicationData.mdf;Integrated Security=True;Connect Timeout=30";
+        string connectionString = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Users\kenne\Source\Repos\ApplicationStorer\ApplicationStorer\ApplicationStorer\ApplicationData.mdf;Integrated Security=True;Connect Timeout=30";
         
         
         //Populate the table! Using SQLDataAdapter
@@ -69,9 +72,15 @@ namespace ApplicationStorer
 
                 cmd.ExecuteNonQuery();
                 dataGridView1.DataSource = GetApplicationData();
-
+                dataGridView1.ClearSelection();
                 Clear();
             }
+        }
+        //CLEAR button
+        private void button1_Click(object sender, EventArgs e)
+        {
+            dataGridView1.ClearSelection();
+            Clear();
         }
         //DELETING applications
         private void DeleteButton_Click(object sender, EventArgs e)
@@ -137,11 +146,12 @@ namespace ApplicationStorer
 
                 cmd.ExecuteNonQuery();
                 dataGridView1.DataSource = GetApplicationData();
-
+                dataGridView1.ClearSelection();
                 Clear();
             }
 
         }
+
 
 
         //Row click, populate the text boxes with given table information
@@ -221,5 +231,23 @@ namespace ApplicationStorer
         {
             System.Diagnostics.Process.Start("http://www.kennethblix.no");
         }
+
+
+        //feature, when the deadline date expires the row shows up in red
+        private void dataGridView1_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
+        {
+            if (e.RowIndex > -1 && this.dataGridView1.Columns[e.ColumnIndex].Name == "DeadlineDate")
+            {
+                if (e.Value != null)
+                {
+                    if (DateTime.Parse(e.Value.ToString()) <= DateTime.Now)
+                    {
+                        this.dataGridView1.Rows[e.RowIndex].DefaultCellStyle.ForeColor = Color.Red;
+                    }
+                }
+            }
+        }
+
+
     }
 }
