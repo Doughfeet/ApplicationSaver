@@ -27,7 +27,7 @@ namespace ApplicationStorer
 
 
         int selectedRow;
-        string connectionString = @"Data Source = (LocalDB)\MSSQLLocalDB; AttachDbFilename = C:\Users\kenne\Source\Repos\ApplicationStorer\ApplicationStorer\ApplicationStorer\Data\ApplicationData.mdf; Integrated Security = True; Connect Timeout = 30";
+        string connectionString = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=|DataDirectory|\ApplicationData.mdf;Integrated Security=True;Connect Timeout=30";
         
         
         //Populate the table! Using SQLDataAdapter
@@ -35,7 +35,6 @@ namespace ApplicationStorer
         {
             DataTable dtApplication = new DataTable();
             
-            string connectionString = @"Data Source = (LocalDB)\MSSQLLocalDB; AttachDbFilename = C:\Users\kenne\Source\Repos\ApplicationStorer\ApplicationStorer\ApplicationStorer\Data\ApplicationData.mdf; Integrated Security = True; Connect Timeout = 30";
             string query = "SELECT * FROM ApplicationTable";
             
             using (SqlConnection connection = new SqlConnection(connectionString))
