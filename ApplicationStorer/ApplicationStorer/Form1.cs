@@ -248,6 +248,9 @@ namespace ApplicationStorer
             }
         }
 
-
+        private void informationToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show("A small program to keep track on work applications." + "\n" + "Belive in yourself and keep your head up high!" + "\n" + " -Kenneth Blix-", "Application saver", MessageBoxButtons.OK, MessageBoxIcon.Information);
+        }
     }
 }
